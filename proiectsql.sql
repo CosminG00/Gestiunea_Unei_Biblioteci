@@ -160,12 +160,8 @@ VALUES(11,10,'Branescu',2900,'director', TO_DATE('7.05.2009','DD.MM.YYYY'));
 INSERT INTO STOC_PROIECT (id_carte, titlu_carte, gen_carte, autor_carte)
 VALUES(1000,'Branescu','Cristian',0799999999, 4);
 
-
-
-
-
 INSERT INTO STOC_PROIECT (id_carte, titlu_carte, gen_carte, autor_carte)
-VALUES(1000, 'One Hundred Years of Solitude', 'Fiction', 'Gabriel García Márquez');
+VALUES(1000, 'One Hundred Years of Solitude', 'Fiction', 'Gabriel GarcÃ­a MÃ¡rquez');
 
 INSERT INTO STOC_PROIECT (id_carte, titlu_carte, gen_carte, autor_carte)
 VALUES(1001, 'Pride and Prejudice', 'Romance', 'Jane Austen');
@@ -228,12 +224,8 @@ INSERT INTO CARTE_IMPRUMUTATA (id_biblioteca, id_client, id_angajat, id_carte, d
 VALUES(2,6,6,1009,TO_DATE('05.06.2010','DD.MM.YYYY'), TO_DATE('01.08.2010','DD.MM.YYYY'));
 
 
-
 ALTER TABLE STOC_PROIECT rename to STOC_PROIECT_BAZE_DE_DATE;
-
 ALTER TABLE STOC_PROIECT_BAZE_DE_DATE rename to STOC_PROIECT;
-
-
 
 ALTER TABLE ANGAJATI_PROIECT
 ADD varsta_angajat number(4);
@@ -251,12 +243,8 @@ UPDATE ANGAJATI_PROIECT SET salariu=salariu+200 WHERE extract(year from data_ang
 UPDATE BIBLIOTECA_PROIECT SET denumire_biblioteca='Biblioteca din centru' WHERE adresa_biblioteca='Pitesti';
 
 
-
-
 DROP TABLE CARTE_IMPRUMUTATA;
 FLASHBACK TABLE CARTE_IMPRUMUTATA TO BEFORE DROP;
-
-
 
 
 SELECT id_angajat, id_biblioteca, nume_angajat, salariu, functie, data_angajare FROM ANGAJATI_PROIECT;
@@ -301,8 +289,6 @@ from ANGAJATI_PROIECT
 WHERE salariu between 2700 and 3000;
 
 
-
-10-sa se afiseze din ce biblioteci s au imprumutat cartile
 select  denumire_biblioteca
 FROM biblioteca_proiect 
 where id_biblioteca in ( select id_biblioteca from biblioteca_proiect
@@ -324,28 +310,18 @@ end "salariul marit"
 from angajati_proiect;
 
 
-
 Select nume_client, imprumuturi_anterioare, imprumuturi_anterioare + 1 as "imprumuturi modificate"
 from clienti_proiect 
 where imprumuturi_anterioare > 3;
 
 
-
-
-
-
-
-
-14-sa se faca o catalogare a imprumuturilor avute de clienti astfel incat,
-1= imprumuturi putine, 4=imprumuturi multe, iar celalalte sunt imprumuturi medii
+//sa se faca o catalogare a imprumuturilor avute de clienti astfel incat,
+//imprumuturi putine, 4=imprumuturi multe, iar celalalte sunt imprumuturi medii
 select nume_client,
 case imprumuturi_anterioare when 1 then 'imprumuturi putine'
 when 4 then 'imprumuturi multe'
 else 'imprumuturi medii' end
 from clienti_proiect;
-
-
-
 
 
 select nume_angajat,functie, salariu,
@@ -354,26 +330,13 @@ from angajati_proiect;
 
 
 
-
-
-
-
-
 select nume_client from clienti_proiect where lower(prenume_client) like '%es%'
 union
 select nume_client from clienti_proiect where lower(prenume_client) like '%an%';
 
 
-
-
-
-
-
-
-
 SELECT DISTINCT data_imprumut from carte_imprumutata
 order by data_imprumut;
-
 
 
 select nume_angajat,salariu, data_angajare
@@ -400,13 +363,9 @@ nocache;
 ALTER SEQUENCE seq_angajati_proiect increment by 100;
 Alter sequence seq_angajati_proiect maxvalue 2000;
 
-
 Select * from user_sequences;
 
-
 Drop sequence seq_angajati_proiect
-
-
 
 create or replace view imprumuturi
 as select nume_client, imprumuturi_anterioare from clienti_proiect
@@ -421,9 +380,7 @@ from angajati_proiect
 where salariu > (select avg(salariu) from angajati_proiect)
 
 
-
-create index index_clienti_proiect on clienti_proiect(nume_client);
-
+Create index index_clienti_proiect on clienti_proiect(nume_client);
 
 Create synonym carte_sinonim for carte_imprumutata;
 
