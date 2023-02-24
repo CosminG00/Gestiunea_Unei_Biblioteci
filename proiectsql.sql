@@ -382,5 +382,5 @@ where salariu > (select avg(salariu) from angajati_proiect)
 
 Create index index_clienti_proiect on clienti_proiect(nume_client);
 
-Create synonym carte_sinonim for carte_imprumutata;
+
 
